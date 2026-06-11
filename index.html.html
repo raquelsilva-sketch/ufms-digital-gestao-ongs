@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UFMS Digital - Gestão de ONGs de Proteção Animal</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Estilos adicionais para simular scrollbars suaves */
+        .custom-scroll::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scroll::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 4px;
+        }
+        .custom-scroll::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        .custom-scroll::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-slate-50 font-sans text-slate-800">
+
+    <!-- HEADER SEMÂNTICO -->
+    <header class="bg-emerald-600 text-white shadow-md">
+        <div class="max-w-6xl mx-auto px-4 py-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div>
+                <h1 class="text-2xl font-bold tracking-tight">UFMS Digital - Gestão de ONGs</h1>
+                <p class="text-emerald-100 text-sm">Plataforma de Proteção e Acolhimento de Felinos</p>
+            </div>
+            <div class="bg-emerald-700 px-4 py-2 rounded-lg text-sm font-medium">
+                📍 Campo Grande - MS
+            </div>
+        </div>
+    </header>
+
+    <!-- CONTEÚDO PRINCIPAL (Grid Responsivo) -->
+    <main class="max-w-6xl mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+        
+        <!-- SEÇÃO 1: GESTÃO DE FELINOS -->
+        <section class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+            <h2 class="text-xl font-semibold mb-4 text-emerald-800 flex items-center gap-2">
+                🐱 Controle de Felinos
+            </h2>
+            <form id="form-gato" class="space-y-3 mb-6 bg-slate-50 p-4 rounded-lg">
+                <div>
+                    <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Nome do Gato</label>
+                    <input type="text" id="gato-nome" required class="w-full px-3 py-2 border rounded-md focus:outline-emerald-500 text-sm" placeholder="Ex: Mingau">
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Idade/Tempo</label>
+                        <input type="text" id="gato-idade" required class="w-full px-3 py-2 border rounded-md focus:outline-emerald-500 text-sm" placeholder="Ex: 6 meses">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Status</label>
+                        <select id="gato-status" class="w-full px-3 py-2 border rounded-md focus:outline-emerald-500 text-sm bg-white">
+                            <option value="Para Adoção">Para Adoção</option>
+                            <option value="Tratamento">Em Tratamento</option>
+                            <option value="Adotado">Adotado</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-2 rounded-md transition text-sm">Cadastrar Felino</button>
+            </form>
+
+            <!-- LISTA DE GATOS -->
+            <div id="lista-gatos" class="space-y-2 max-h-60 overflow-y-auto pr-1 custom-scroll">
+                <!-- Inserido dinamicamente via JS -->
+            </div>
+        </section>
+
+        <!-- SEÇÃO 2: ESCALA DE VOLUNTÁRIOS -->
+        <section class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+            <h2 class="text-xl font-semibold mb-4 text-emerald-800 flex items-center gap-2">
+                📅 Escala de Voluntários
+            </h2>
+            <form id="form-voluntario" class="space-y-3 mb-6 bg-slate-50 p-4 rounded-lg">
+                <div>
+                    <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Nome do Voluntário</label>
+                    <input type="text" id="voluntario-nome" required class="w-full px-3 py-2 border rounded-md focus:outline-emerald-500 text-sm" placeholder="Nome completo">
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Dia da Semana</label>
+                        <select id="voluntario-dia" class="w-full px-3 py-2 border rounded-md focus:outline-emerald-500 text-sm bg-white">
+                            <option value="Segunda-feira">Segunda</option>
+                            <option value="Terça-feira">Terça</option>
+                            <option value="Quarta-feira">Quarta</option>
+                            <option value="Quinta-feira">Quinta</option>
+                            <option value="Sexta-feira">Sexta</option>
+                            <option value="Sábado">Sábado</option>
+                            <option value="Domingo">Domingo</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Turno</label>
+                        <select id="voluntario-turno" class="w-full px-3 py-2 border rounded-md focus:outline-emerald-500 text-sm bg-white">
+                            <option value="Manhã">Manhã</option>
+                            <option value="Tarde">Tarde</option>
+                            <option value="Noite">Noite</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-2 rounded-md transition text-sm">Agendar Turno</button>
+            </form>
+
+            <!-- LISTA DE VOLUNTÁRIOS -->
+            <div id="lista-voluntarios" class="space-y-2 max-h-60 overflow-y-auto pr-1 custom-scroll">
+                <!-- Inserido dinamicamente via JS -->
+            </div>
+        </section>
+
+        <!-- SEÇÃO 3: CAPTAÇÃO DE RECURSOS (TRANSPARÊNCIA) -->
+        <section class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 md:col-span-2">
+            <h2 class="text-xl font-semibold mb-4 text-emerald-800 flex items-center gap-2">
+                💰 Campanhas de Arrecadação e Transparência
+            </h2>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <form id="form-campanha" class="space-y-3 bg-slate-50 p-4 rounded-lg h-fit">
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Título da Campanha</label>
+                        <input type="text" id="campanha-titulo" required class="w-full px-3 py-2 border rounded-md focus:outline-emerald-500 text-sm" placeholder="Ex: Cirurgia do Gato Frajola">
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Meta (R$)</label>
+                            <input type="number" id="campanha-meta" required min="1" class="w-full px-3 py-2 border rounded-md focus:outline-emerald-500 text-sm" placeholder="1000">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Arrecadado (R$)</label>
+                            <input type="number" id="campanha-arrecadado" min="0" class="w-full px-3 py-2 border rounded-md focus:outline-emerald-500 text-sm" placeholder="0">
+                        </div>
+                    </div>
+                    <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-2 rounded-md transition text-sm">Lançar Campanha</button>
+                </form>
+
+                <!-- GRID DAS CAMPANHAS EM ANDAMENTO -->
+                <div id="lista-campanhas" class="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4 max-h-72 overflow-y-auto pr-1 custom-scroll">
+                    <!-- Inserido dinamicamente via JS -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- RODAPÉ ACADÊMICO -->
+    <footer class="bg-slate-800 text-slate-400 text-xs py-6 mt-12 border-t border-slate-700">
+        <div class="max-w-6xl mx-auto px-4 text-center space-y-2">
+            <p class="font-semibold text-slate-300">Autora: Raquel dos Santos Silva</p>
+            <p>Projeto Integrador de Tecnologia da Informação II — Semestre 2026.1</p>
+            <p>Programa de Extensão UFMS Digital (Reg. 95DX7.200525)</p>
+        </div>
+    </footer>
+
+    <!-- LÓGICA DE PERSISTÊNCIA DINÂMICA (LocalStorage) -->
+    <script>
+        // Inicialização de dados fictícios para começar com o sistema populado caso esteja vazio
+        const inicialGatos = [
+            { id: "1", nome: "Mingau", idade: "6 meses", status: "Para Adoção" },
+            { id: "2", nome: "Frajola", idade: "1 ano", status: "Tratamento" },
+            { id: "3", nome: "Luna", idade: "2 anos", status: "Adotado" }
+        ];
+        const inicialVoluntarios = [
+            { id: "1", nome: "Ana Costa", diaSemana: "Sábado", turno: "Manhã" },
+            { id: "2", nome: "Carlos Souza", diaSemana: "Segunda-feira", turno: "Noite" }
+        ];
+        const inicialCampanhas = [
+            { id: "1", titulo: "Cirurgia do Gato Frajola", meta: 1500, arrecadado: 1200 },
+            { id: "2", titulo: "Ração para o Mês de Julho", meta: 3000, arrecadado: 750 }
+        ];
+
+        // Carregar dados ou setar iniciais
+        let gatos = JSON.parse(localStorage.getItem('ong_gatos')) || inicialGatos;
+        let voluntarios = JSON.parse(localStorage.getItem('ong_voluntarios')) || inicialVoluntarios;
+        let campanhas = JSON.parse(localStorage.getItem('ong_campanhas')) || inicialCampanhas;
+
+        function salvarDados() {
+            localStorage.setItem('ong_gatos', JSON.stringify(gatos));
+            localStorage.setItem('ong_voluntarios', JSON.stringify(voluntarios));
+            localStorage.setItem('ong_campanhas', JSON.stringify(campanhas));
+        }
+
+        // RENDERIZADORES
+        function renderGatos() {
+            const container = document.getElementById('lista-gatos');
+            if (gatos.length === 0) {
+                container.innerHTML = '<p class="text-sm text-slate-400 italic">Nenhum gato cadastrado.</p>';
+                return;
+            }
+            container.innerHTML = gatos.map(g => {
+                let badgeColor = 'bg-blue-100 text-blue-800';
+                if (g.status === 'Tratamento') badgeColor = 'bg-amber-100 text-amber-800';
+                if (g.status === 'Adotado') badgeColor = 'bg-green-100 text-green-800';
+
+                return `
+                    <div class="flex justify-between items-center p-3 border rounded-lg bg-white shadow-sm">
+                        <div>
+                            <h3 class="font-semibold text-sm">${g.nome}</h3>
+                            <p class="text-xs text-slate-500">${g.idade}</p>
+                        </div>
+                        <span class="text-xs px-2 py-1 rounded-full font-medium ${badgeColor}">${g.status}</span>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function renderVoluntarios() {
+            const container = document.getElementById('lista-voluntarios');
+            if (voluntarios.length === 0) {
+                container.innerHTML = '<p class="text-sm text-slate-400 italic">Nenhum voluntário escalado.</p>';
+                return;
+            }
+            container.innerHTML = voluntarios.map(v => `
+                <div class="p-3 border rounded-lg bg-white shadow-sm flex justify-between items-center">
+                    <div>
+                        <h3 class="font-semibold text-sm">${v.nome}</h3>
+                        <p class="text-xs text-slate-500">${v.diaSemana}</p>
+                    </div>
+                    <span class="text-xs bg-slate-100 text-slate-700 px-2 py-1 rounded font-medium">${v.turno}</span>
+                </div>
+            `).join('');
+        }
+
+        function renderCampanhas() {
+            const container = document.getElementById('lista-campanhas');
+            if (campanhas.length === 0) {
+                container.innerHTML = '<p class="text-sm text-slate-400 italic col-span-2">Nenhuma campanha ativa.</p>';
+                return;
+            }
+            container.innerHTML = campanhas.map(c => {
+                const porcentagem = Math.min(Math.round((c.arrecadado / c.meta) * 100), 100);
+                return `
+                    <div class="p-4 border rounded-xl bg-white shadow-sm flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-bold text-sm text-slate-700 mb-2">${c.titulo}</h3>
+                            <div class="flex justify-between text-xs text-slate-500 mb-1">
+                                <span>Progresso: ${porcentagem}%</span>
+                                <span>R$ ${c.arrecadado} / R$ ${c.meta}</span>
+                            </div>
+                            <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                                <div class="bg-emerald-500 h-full transition-all duration-500" style="width: ${porcentagem}%"></div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // CAPTURA DOS FORMULÁRIOS
+        document.getElementById('form-gato').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const nome = document.getElementById('gato-nome').value;
+            const idade = document.getElementById('gato-idade').value;
+            const status = document.getElementById('gato-status').value;
+            
+            gatos.unshift({ id: Date.now().toString(), nome, idade, status });
+            salvarDados();
+            renderGatos();
+            this.reset();
+        });
+
+        document.getElementById('form-voluntario').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const nome = document.getElementById('voluntario-nome').value;
+            const diaSemana = document.getElementById('voluntario-dia').value;
+            const turno = document.getElementById('voluntario-turno').value;
+            
+            voluntarios.unshift({ id: Date.now().toString(), nome, diaSemana, turno });
+            salvarDados();
+            renderVoluntarios();
+            this.reset();
+        });
+
+        document.getElementById('form-campanha').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const titulo = document.getElementById('campanha-titulo').value;
+            const meta = parseFloat(document.getElementById('campanha-meta').value);
+            const arrecadado = parseFloat(document.getElementById('campanha-arrecadado').value) || 0;
+            
+            campanhas.unshift({ id: Date.now().toString(), titulo, meta, arrecadado });
+            salvarDados();
+            renderCampanhas();
+            this.reset();
+        });
+
+        // Renderização Inicial
+        renderGatos();
+        renderVoluntarios();
+        renderCampanhas();
+    </script>
+</body>
+</html>
